@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "991194243527",
+    "project_id": "manga-7f0f9",
+    "storage_bucket": "manga-7f0f9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991194243527:android:8fb3486712734df504f9e2",
+        "android_client_info": {
+          "package_name": "com.example.togetherso"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVh8xaeEO9zza07gV1yDz55dMlEHGnVSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
