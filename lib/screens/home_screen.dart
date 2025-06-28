@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../providers/product_provider.dart';
 import '../screens/cart_screen.dart';
 import '../screens/profile_screen.dart';
+import '../widgets/product_item.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -218,17 +220,22 @@ class ForYouTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final products = Provider.of<ProductsProvider>(context).products;
+
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
+        childAspectRatio: 0.7,
       ),
-      itemCount: 6,
-      itemBuilder: (context, index) =>
-          Card(child: Center(child: Text("Product $index"))),
+      itemCount: products.length,
+      itemBuilder: (context, index) {
+        final product = products[index];
+        return ProductCard(product: product);
+      },
     );
   }
 }
@@ -238,7 +245,20 @@ class PopularTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Popular Products"));
+    final products = Provider.of<ProductsProvider>(context).popularProducts;
+
+    return ListView.builder(
+      itemCount: products.length,
+      itemBuilder: (context, index) {
+        final product = products[index];
+        return ListTile(
+          leading: Image.network(product.imageUrl, width: 50, height: 50),
+          title: Text(product.name),
+          subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+          trailing: const Icon(Icons.star, color: Colors.amber),
+        );
+      },
+    );
   }
 }
 
@@ -247,7 +267,19 @@ class CheapestTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Cheapest Products"));
+    final products = Provider.of<ProductsProvider>(context).cheapestProducts;
+
+    return ListView.builder(
+      itemCount: products.length,
+      itemBuilder: (context, index) {
+        final product = products[index];
+        return ListTile(
+          leading: Image.network(product.imageUrl, width: 50, height: 50),
+          title: Text(product.name),
+          subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+        );
+      },
+    );
   }
 }
 
